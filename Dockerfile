@@ -22,4 +22,5 @@ COPY --from=build /app/target/lezzetkodu-api-*.jar app.jar
 USER appuser
 
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "/app/app.jar"]
+# Java'nin container'in bellek sinirina gore ayarlanmasi (ucretsiz bulut sunucularinda 512 MB).
+ENTRYPOINT ["java", "-XX:MaxRAMPercentage=75", "-XX:+UseSerialGC", "-jar", "/app/app.jar"]
