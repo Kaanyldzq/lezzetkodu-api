@@ -3,7 +3,8 @@ spring:
     name: lezzetkodu-api
   datasource:
     # Degerler ortam degiskenlerinden gelir; yoksa yerel gelistirme varsayilanlari kullanilir.
-    url: ${DB_URL:jdbc:postgresql://localhost:5432/lezzetkodu}
+    # DB_URL verilirse o kullanilir; yoksa DB_HOST/DB_PORT/DB_NAME parcalarindan olusturulur (Render bu sekilde verir).
+    url: ${DB_URL:jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:lezzetkodu}}
     username: ${DB_USERNAME:lezzetkodu}
     password: ${DB_PASSWORD:lezzetkodu}
     hikari:

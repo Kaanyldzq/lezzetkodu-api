@@ -23,4 +23,5 @@ USER appuser
 
 EXPOSE 8080
 # Java'nin container'in bellek sinirina gore ayarlanmasi (ucretsiz bulut sunucularinda 512 MB).
+# Java'nin container'in bellek sinirina gore ayarlanmasi (ucretsiz bulut sunucularinda 512 MB).
 ENTRYPOINT ["java", "-XX:MaxRAMPercentage=75", "-XX:+UseSerialGC", "-jar", "/app/app.jar"]

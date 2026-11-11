@@ -1,0 +1,50 @@
+# Render Blueprint: API + PostgreSQL'i tek seferde kurar.
+# Render panelinde: New + -> Blueprint -> bu repoyu sec -> Apply.
+
+services:
+  - type: web
+    name: lezzetkodu-api
+    runtime: docker
+    plan: free
+    region: frankfurt
+    envVars:
+      # Veritabani bilgileri asagidaki veritabanindan otomatik gelir.
+      - key: DB_HOST
+        fromDatabase:
+          name: lezzetkodu-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: lezzetkodu-db
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: lezzetkodu-db
+          property: database
+      - key: DB_USERNAME
+        fromDatabase:
+          name: lezzetkodu-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: lezzetkodu-db
+          property: password
+      # Render rastgele, guclu degerler uretir; panelde Environment sekmesinden gorulebilir.
+      - key: JWT_SECRET
+        generateValue: true
+      - key: ADMIN_USERNAME
+        value: admin
+      - key: ADMIN_PASSWORD
+        generateValue: true
+      # Ucretsiz sunucunun dusuk CPU'sunda acilisi hizlandirir.
+      - key: SPRING_MAIN_LAZY_INITIALIZATION
+        value: "true"
+      - key: JAVA_TOOL_OPTIONS
+        value: "-XX:TieredStopAtLevel=1"
+
+databases:
+  - name: lezzetkodu-db
+    plan: free
+    region: frankfurt
+    databaseName: lezzetkodu
+    user: lezzetkodu
