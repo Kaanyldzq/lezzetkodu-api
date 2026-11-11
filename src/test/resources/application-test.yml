@@ -1,0 +1,19 @@
+# Sadece testlerde kullanilir: PostgreSQL yerine bellek ici H2 (PostgreSQL uyumluluk modunda).
+spring:
+  datasource:
+    url: jdbc:h2:mem:lezzetkodu;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      # Sema yine Flyway ile kurulur; tip dogrulamasi gercek PostgreSQL'de yapilir.
+      ddl-auto: none
+
+app:
+  jwt:
+    # Yalnizca test anahtari; gercek ortamda JWT_SECRET ortam degiskeni kullanilir.
+    secret: ffzAh31ZUYARiapEgiFvWXME+KMTKfqN6un86vuN1wP4aW4FlwknDnNrml8dzXB8
+    expiration: PT1H
+  admin:
+    username: admin
+    password: admin-test-123
